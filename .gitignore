@@ -1,0 +1,17 @@
+node_modules/
+.next/
+.cache/
+.local/
+.agents/
+uploads/
+backend/prisma/dev.db
+zeewear-erp.zip
+zeewear-deploy.zip
+zeewear-deploy.tar.gz
+.replit
+replit.md
+generated-icon.png
+attached_assets/
+*.pyc
+__pycache__/
+.env
