@@ -1,7 +1,18 @@
-const express = require("express");
 const path = require("path");
 const fs = require("fs");
 
+const envPath = path.join(__dirname, ".env");
+if (fs.existsSync(envPath)) {
+  require("dotenv").config({ path: envPath });
+}
+
+const isHostinger = __dirname.includes("/domains/") || __dirname.includes("/nodejs/");
+if (isHostinger) {
+  if (!process.env.NODE_ENV) process.env.NODE_ENV = "production";
+  if (!process.env.JWT_SECRET) process.env.JWT_SECRET = "zeewear-erp-2026-production-secret-key-secure";
+}
+
+const express = require("express");
 const dev = process.env.NODE_ENV !== "production";
 const port = parseInt(process.env.PORT || "5000", 10);
 
@@ -96,6 +107,6 @@ if (dev) {
   });
 
   server.listen(port, "0.0.0.0", () => {
-    console.log(`> Server ready on http://0.0.0.0:${port}`);
+    console.log(`> Production server ready on http://0.0.0.0:${port}`);
   });
 }
